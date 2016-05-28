@@ -9,6 +9,7 @@ def get_data():
 	results = []
 	for element in content:
 		results.append({
+			"id": int(element["id"]),
 			"name": element["name"],
 			#via https://github.com/alekstorm/pygravatar/blob/master/gravatar.py#L14
 			"portrait": "http://gravatar.com/avatar/{}".format(md5(element["email"].strip().lower().encode()).hexdigest())
@@ -17,7 +18,7 @@ def get_data():
 
 def get_data2(): #offline debugging
 	return [
-		{"name": "A", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"},
-		{"name": "B", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"},
-		{"name": "C", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"}
+		{"id": 0, "name": "A", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"},
+		{"id": 1, "name": "B", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"},
+		{"id": 2, "name": "C", "portrait": "/usr/share/ubuntu-html5-ui-toolkit/0.1/ambiance/img/avatar_contacts_list@8.png"}
 	]
