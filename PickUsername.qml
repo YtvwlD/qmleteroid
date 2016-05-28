@@ -61,7 +61,7 @@ Rectangle
 			// Import the main module and load the data
 			importModule('PickUsername', function ()
 			{
-				py.call('PickUsername.get_data', [], function(result)
+				py.call('PickUsername.get_data2', [], function(result)
 				{
 					// Load the received data into the list model
 					for (var i=0; i<result.length; i++)
