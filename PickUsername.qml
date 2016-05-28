@@ -63,7 +63,6 @@ Rectangle
 		id: saveButton
 		width: root.width
 		y: label.height + usersRect.height
-		text: "Save"
 		action: saveAction
 	}
 	Action
