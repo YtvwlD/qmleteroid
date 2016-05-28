@@ -44,6 +44,11 @@ Rectangle
 					fillMode: Image.PreserveAspectFit
 					source: portrait
 					anchors.horizontalCenter: parent.horizontalCenter
+					MouseArea
+					{
+						anchors.fill: parent
+						onClicked: usersGrid.currentIndex = index
+					}
 				}
 				Text
 				{
