@@ -7,14 +7,25 @@ Rectangle
 	id: root
 	width: 360
 	height: 360
-	Text
+	Rectangle
 	{
-		id: label
-		text: "Loading..."
-		height: 25
 		width: root.width
-		verticalAlignment: Text.AlignVCenter
-		horizontalAlignment: Text.AlignHCenter
+		height: switchUserButton.height
+		Text
+		{
+			id: label
+			text: "Loading..."
+			height: parent.height
+			width: root.width - switchUserButton.width
+			verticalAlignment: Text.AlignVCenter
+			horizontalAlignment: Text.AlignHCenter
+		}
+		Button
+		{
+			id: switchUserButton
+			x: label.width
+			action: switchUserAction
+		}
 	}
 	Rectangle
 	{
@@ -80,6 +91,18 @@ Rectangle
 		width: root.width
 		y: label.height + drinksRect.height
 		action: buyAction
+	}
+	Action
+	{
+		id: switchUserAction
+		text: "S&witch"
+		//iconName: ""
+		//shortcut
+		onTriggered:
+		{
+			console.log("Switching user...");
+			pageLoader.source = "PickUsername.qml";
+		}
 	}
 	Action
 	{

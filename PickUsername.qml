@@ -74,6 +74,7 @@ Rectangle
 		{
 			console.log("Saving uid: " + usersGrid.currentItem.uid);
 			globalSettings.uid = usersGrid.currentItem.uid;
+			pageLoader.source = "BuyDrink.qml";
 		}
 	}
 	ListModel
