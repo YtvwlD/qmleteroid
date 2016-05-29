@@ -18,6 +18,14 @@ def get_user_data(uid):
 	assert content["id"] == uid
 	return _parseUser(content)
 
+def save_user_data(uid, name, balance, email):
+	d = {
+		"name": name,
+		"email": email,
+		"balance": balance
+	}
+	requests.put("http://mete/users/{}.json".format(uid), data=d)
+
 def _parseUser(data):
 	return {
 		"id": content["id"],

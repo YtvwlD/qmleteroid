@@ -108,7 +108,14 @@ Rectangle
 		text: "O&k"
 		shortcut: StandardKey.Enter
 		iconName: "Ok"
-		onTriggered: console.log("TODO") //TODO
+		onTriggered:
+		{
+			py.call("lib2.save_user_data", [user.uid, user.name, user.balance, user.email], function(result)
+			{
+				//TODO: check if everything went right
+				pageLoader.source = "BuyDrink.qml";
+			});
+		}
 	}
 	Action
 	{

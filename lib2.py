@@ -28,6 +28,9 @@ def get_users_data():
 def get_user_data(uid):
 	return fake_users_list[uid]
 
+def save_user_data(uid, name, balance, email):
+	print("This is not real.")
+
 def get_drinks():
 	return [{
 		"id": 0,
