@@ -37,6 +37,8 @@ Rectangle
 			delegate: Column
 			{
 				property int did: id
+				property string drink_name: name
+				property double price: donation_recommended
 				Image
 				{
 					width: 140
@@ -88,9 +90,22 @@ Rectangle
 		//iconName: ""
 		onTriggered:
 		{
-			console.log("TODO: Buying: " + drinksGrid.currentItem.did);
+			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");
 			//TODO
+			py.call("BuyDrink.buy_drink2", [user.uid, drinksGrid.currentItem.price], function()
+			{
+				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
+				user.balance = user.balance - drinksGrid.currentItem.price;
+				console.log("New balance: " + user.balance + "€");
+			})
 		}
+	}
+	Item
+	{
+		id: user
+		property double balance: 0.00
+		property int uid: 0
+		property string name: ""
 	}
 	ListModel
 	{
