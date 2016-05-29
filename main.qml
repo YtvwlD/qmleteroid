@@ -3,6 +3,7 @@ import Qt.labs.settings 1.0
 
 Item
 {
+	id: window
 	width: 360
 	height: 360
 	Loader
@@ -16,6 +17,10 @@ Item
 	{
 		id: globalSettings
 		property int uid: -1
+		property alias windowX: window.x
+    property alias windowY: window.x
+    property alias windowWidth: window.width
+    property alias windowHeight: window.height
 	}
 	Component.onCompleted:
 	{
