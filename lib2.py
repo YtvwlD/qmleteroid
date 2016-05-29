@@ -31,6 +31,9 @@ def get_user_data(uid):
 def save_user_data(uid, name, balance, email):
 	print("This is not real.")
 
+def add_user(name, balance, email):
+	print("This is not real.")
+
 def get_drinks():
 	return [{
 		"id": 0,

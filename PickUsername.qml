@@ -6,14 +6,25 @@ Rectangle
 	id: root
 	width: 360
 	height: 360
-	Text
+	Rectangle
 	{
-		id: label
-		text: "Select your account:"
-		height: 25
 		width: root.width
-		verticalAlignment: Text.AlignVCenter
-		horizontalAlignment: Text.AlignHCenter
+		height: addUserButton.height
+		Text
+		{
+			id: label
+			text: "Select your account:"
+			height: parent.height
+			width: root.width - addUserButton.width
+			verticalAlignment: Text.AlignVCenter
+			horizontalAlignment: Text.AlignHCenter
+		}
+		Button
+		{
+			id: addUserButton
+			x: label.width
+			action: addUserAction
+		}
 	}
 	Rectangle
 	{
@@ -75,6 +86,14 @@ Rectangle
 			globalSettings.uid = usersGrid.currentItem.uid;
 			pageLoader.source = "BuyDrink.qml";
 		}
+	}
+	Action
+	{
+		id: addUserAction
+		text: "&Add"
+		//shortcut
+		//iconName
+		onTriggered: pageLoader.source = "AddUser.qml"
 	}
 	ListModel
 	{

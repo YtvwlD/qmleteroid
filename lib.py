@@ -26,6 +26,14 @@ def save_user_data(uid, name, balance, email):
 	}
 	requests.put("http://mete/users/{}.json".format(uid), data=d)
 
+def add_user(name, balance, email):
+	p = {
+		"name": name,
+		"balance": balance,
+		"email": email
+	}
+	requests.post("http://mete/users", params=p)
+
 def _parseUser(data):
 	return {
 		"id": content["id"],
