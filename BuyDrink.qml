@@ -16,7 +16,7 @@ Rectangle
 			id: label
 			text: "Loading..."
 			height: parent.height
-			width: root.width - switchUserButton.width
+			width: root.width - switchUserButton.width - editUserButton.width
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
 		}
@@ -25,6 +25,12 @@ Rectangle
 			id: switchUserButton
 			x: label.width
 			action: switchUserAction
+		}
+		Button
+		{
+			id: editUserButton
+			x: label.width + switchUserButton.width
+			action: editUserAction
 		}
 	}
 	Rectangle
@@ -102,6 +108,18 @@ Rectangle
 		{
 			console.log("Switching user...");
 			pageLoader.source = "PickUsername.qml";
+		}
+	}
+	Action
+	{
+		id: editUserAction
+		text: "&Edit"
+		//iconName: ""
+		//shortcut
+		onTriggered:
+		{
+			console.log("Editing user " + user.name + "...");
+			pageLoader.source = "UserSettings.qml";
 		}
 	}
 	Action
