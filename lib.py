@@ -4,14 +4,27 @@ import requests
 
 json = JSONDecoder()
 
-def get_user_info(uid):
+def get_users_data():
+	req = requests.get("http://mete/users.json")
+	content = json.decode(req.text)
+	results = []
+	for element in content:
+		results.append(_parseUser(element))
+	return results
+
+def get_user_data(uid):
 	req = requests.get("http://mete/users/{}.json".format(uid))
 	content = json.decode(req.text)
 	assert content["id"] == uid
+	return _parseUser(content)
+
+def _parseUser(data):
 	return {
-		"name": content["name"],
 		"id": content["id"],
-		"balance": content["balance"]
+		"name": content["name"],
+		"balance": content["balance"],
+		"email": content["email"],
+		"portrait": "http://gravatar.com/avatar/{}".format(md5(content["email"].strip().lower().encode()).hexdigest())
 	}
 
 def get_drinks():
@@ -31,23 +44,3 @@ def get_drinks():
 
 def buy_drink(uid, amount):
 	req = requests.get("http://mete/users/{}/deposit?amount=-{}".format(uid, amount))
-
-def get_user_info2(uid): #offline debugging
-	return {
-		"name": "A",
-		"id": 0,
-		"balance": 10
-	}
-
-def get_drinks2(): #offline debugging
-	return [{
-		"id": 0,
-		"name": "Mate",
-		"bottle_size": 0.5,
-		"caffeine": True,
-		"donation_recommended": 1.5,
-		"logo": ""
-	}]
-
-def buy_drink2(uid, amount):
-	pass

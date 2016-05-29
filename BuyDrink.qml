@@ -1,5 +1,4 @@
 import QtQuick 2.5
-import io.thp.pyotherside 1.4
 import QtQuick.Controls 1.4
 
 Rectangle
@@ -132,7 +131,7 @@ Rectangle
 		{
 			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");
 			//TODO
-			py.call("BuyDrink.buy_drink2", [user.uid, drinksGrid.currentItem.price], function()
+			py.call("lib2.buy_drink", [user.uid, drinksGrid.currentItem.price], function()
 			{
 				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
 				user.balance = user.balance - drinksGrid.currentItem.price;
@@ -156,34 +155,23 @@ Rectangle
 	{
 		id: drinksModel
 	}
-	Python
+	Component.onCompleted:
 	{
-		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
-		id: py
-		Component.onCompleted:
+		py.call('lib2.get_drinks', [], function(result)
 		{
-			// Add the directory of this .qml file to the search path
-			addImportPath(Qt.resolvedUrl('.'));
-			// Import the main module and load the data
-			importModule('BuyDrink', function ()
+			// Load the received data into the list model
+			for (var i=0; i<result.length; i++)
 			{
-				py.call('BuyDrink.get_drinks2', [], function(result)
-				{
-					// Load the received data into the list model
-					for (var i=0; i<result.length; i++)
-					{
-						drinksModel.append(result[i]);
-					}
-					console.log("Got list of drinks.");
-				});
-				py.call("BuyDrink.get_user_info2", [user.uid], function(result)
-				{
-					console.log("Got information for user " + user.uid + ".");
-					user.name = result["name"];
-					user.balance = result["balance"];
-					user.refreshDisplay();
-				});
-			});
-		}
+				drinksModel.append(result[i]);
+			}
+			console.log("Got list of drinks.");
+		});
+		py.call("lib2.get_user_data", [user.uid], function(result)
+		{
+			console.log("Got information for user " + user.uid + ".");
+			user.name = result["name"];
+			user.balance = result["balance"];
+			user.refreshDisplay();
+		});
 	}
 }

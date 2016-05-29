@@ -1,5 +1,4 @@
 import QtQuick 2.5
-import io.thp.pyotherside 1.4
 import QtQuick.Controls 1.4
 
 Rectangle
@@ -128,26 +127,15 @@ Rectangle
 		property string portrait: ""
 		property string email: ""
 	}
-	Python
+	Component.onCompleted:
 	{
-		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
-		id: py
-		Component.onCompleted:
+		py.call("lib2.get_user_data", [user.uid], function(result)
 		{
-			// Add the directory of this .qml file to the search path
-			addImportPath(Qt.resolvedUrl('.'));
-			// Import the main module and load the data
-			importModule('UserSettings', function ()
-			{
-				py.call("UserSettings.get_user_info2", [user.uid], function(result)
-				{
-					console.log("Got information for user " + user.uid + ".");
-					user.name = result["name"];
-					user.balance = result["balance"];
-					user.email = result["email"];
-					user.portrait = result["portrait"];
-				});
-			});
-		}
+			console.log("Got information for user " + user.uid + ".");
+			user.name = result["name"];
+			user.balance = result["balance"];
+			user.email = result["email"];
+			user.portrait = result["portrait"];
+		});
 	}
 }

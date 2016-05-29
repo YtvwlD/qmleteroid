@@ -1,5 +1,7 @@
 import QtQuick 2.5
 import Qt.labs.settings 1.0
+import io.thp.pyotherside 1.4
+
 
 Item
 {
@@ -27,8 +29,22 @@ Item
 		Qt.application.name = "QMLeteroid";
 		Qt.application.organization = "Chaosdorf";
 		Qt.application.domain = "chaosdorf.de";
-		//globalSettings.uid = -1;
-		console.log("uid: " + globalSettings.uid);
-		pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
+	}
+	Python
+	{
+		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
+		id: py
+		Component.onCompleted:
+		{
+			// Add the directory of this .qml file to the search path
+			addImportPath(Qt.resolvedUrl('.'));
+			// Import the main module and load the data
+			importModule('lib2', function()
+			{
+				//globalSettings.uid = -1;
+				console.log("uid: " + globalSettings.uid);
+				pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
+			});
+		}
 	}
 }

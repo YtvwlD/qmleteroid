@@ -1,5 +1,4 @@
 import QtQuick 2.5
-import io.thp.pyotherside 1.4
 import QtQuick.Controls 1.4
 
 Rectangle
@@ -81,44 +80,33 @@ Rectangle
 	{
 		id: usersModel
 	}
-	Python
+	Component.onCompleted:
 	{
-		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
-		id: py
-		Component.onCompleted:
+	py.call('lib2.get_users_data', [], function(result)
+	{
+	// Load the received data into the list model
+	for (var i=0; i<result.length; i++)
 		{
-			// Add the directory of this .qml file to the search path
-			addImportPath(Qt.resolvedUrl('.'));
-			// Import the main module and load the data
-			importModule('PickUsername', function ()
-			{
-				py.call('PickUsername.get_data2', [], function(result)
-				{
-					// Load the received data into the list model
-					for (var i=0; i<result.length; i++)
-					{
-						usersModel.append(result[i]);
-					}
-					console.log("Got list of users.");
-					console.log("Saved uid is: " + globalSettings.uid);
-					// Restore the saved settings
-					usersGrid.highlightFollowsCurrentItem = false;
-					var found = false;
-					for (usersGrid.currentIndex = 0; usersGrid.currentIndex < usersGrid.count; usersGrid.currentIndex++)
-					{
-						if (usersGrid.currentItem.uid == globalSettings.uid)
-						{
-							found = true;
-							break;
-						}
-					}
-					if (!found)
-					{
-						usersGrid.currentIndex = -1;
-					}
-					usersGrid.highlightFollowsCurrentItem = true;
-				});
-			});
+			usersModel.append(result[i]);
 		}
+		console.log("Got list of users.");
+		console.log("Saved uid is: " + globalSettings.uid);
+		// Restore the saved settings
+		usersGrid.highlightFollowsCurrentItem = false;
+		var found = false;
+		for (usersGrid.currentIndex = 0; usersGrid.currentIndex < usersGrid.count; usersGrid.currentIndex++)
+		{
+			if (usersGrid.currentItem.uid == globalSettings.uid)
+			{
+				found = true;
+				break;
+			}
+		}
+		if (!found)
+		{
+			usersGrid.currentIndex = -1;
+		}
+		usersGrid.highlightFollowsCurrentItem = true;
+	});
 	}
 }
