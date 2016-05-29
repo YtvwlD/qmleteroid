@@ -5,15 +5,21 @@ import requests
 json = JSONDecoder()
 
 def get_user_info(uid):
-
-	return []
+	req = requests.get("http://mete/users/{}.json".format(uid))
+	content = json.decode(req.text)
+	assert content["id"] == uid
+	return {
+		"name": content["name"],
+		"id": content["id"],
+		"balance": content["balance"]
+	}
 
 def get_drinks():
 	req = requests.get("http://mete/drinks.json")
 	content = json.decode(req.text)
 	results = []
 	for element in content:
-		result.append({
+		results.append({
 			"id": int(element["id"]),
 			"name": element["name"],
 			"bottle_size": element["bottle_size"],
@@ -27,7 +33,11 @@ def buy_drink(uid, amount):
 	req = requests.get("http://mete/users/{}/deposit?amount=-{}".format(uid, amount))
 
 def get_user_info2(uid): #offline debugging
-	return []
+	return {
+		"name": "A",
+		"id": 0,
+		"balance": 10
+	}
 
 def get_drinks2(): #offline debugging
 	return [{

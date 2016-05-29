@@ -11,7 +11,7 @@ Rectangle
 	Text
 	{
 		id: label
-		text: "Buy drinks for {}:"
+		text: "Loading..."
 		height: 25
 		width: root.width
 		verticalAlignment: Text.AlignVCenter
@@ -97,6 +97,7 @@ Rectangle
 				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
 				user.balance = user.balance - drinksGrid.currentItem.price;
 				console.log("New balance: " + user.balance + "€");
+				user.refreshDisplay();
 			})
 		}
 	}
@@ -106,6 +107,10 @@ Rectangle
 		property double balance: 0.00
 		property int uid: 0
 		property string name: ""
+		function refreshDisplay()
+		{
+			label.text = "Buy drinks for %1 (balance: %2€):".arg(user.name).arg(user.balance);
+		}
 	}
 	ListModel
 	{
@@ -130,6 +135,13 @@ Rectangle
 						drinksModel.append(result[i]);
 					}
 					console.log("Got list of drinks.");
+				});
+				py.call("BuyDrink.get_user_info2", [user.uid], function(result)
+				{
+					console.log("Got information for user " + user.uid + ".");
+					user.name = result["name"];
+					user.balance = result["balance"];
+					user.refreshDisplay();
 				});
 			});
 		}
