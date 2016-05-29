@@ -1,6 +1,5 @@
 import QtQuick 2.5
 import io.thp.pyotherside 1.4
-import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4
 
 Rectangle
@@ -74,13 +73,8 @@ Rectangle
 		onTriggered:
 		{
 			console.log("Saving uid: " + usersGrid.currentItem.uid);
-			userSelectSettings.uid = usersGrid.currentItem.uid;
+			globalSettings.uid = usersGrid.currentItem.uid;
 		}
-	}
-	Settings
-	{
-		id: userSelectSettings
-		property int uid: -1
 	}
 	ListModel
 	{
@@ -105,13 +99,13 @@ Rectangle
 						usersModel.append(result[i]);
 					}
 					console.log("Got list of users.");
-					console.log("Saved uid is: " + userSelectSettings.uid);
+					console.log("Saved uid is: " + globalSettings.uid);
 					// Restore the saved settings
 					usersGrid.highlightFollowsCurrentItem = false;
 					var found = false;
 					for (usersGrid.currentIndex = 0; usersGrid.currentIndex < usersGrid.count; usersGrid.currentIndex++)
 					{
-						if (usersGrid.currentItem.uid == userSelectSettings.uid)
+						if (usersGrid.currentItem.uid == globalSettings.uid)
 						{
 							found = true;
 							break;

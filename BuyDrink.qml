@@ -1,6 +1,5 @@
 import QtQuick 2.5
 import io.thp.pyotherside 1.4
-import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4
 
 Rectangle
@@ -105,7 +104,7 @@ Rectangle
 	{
 		id: user
 		property double balance: 0.00
-		property int uid: 0
+		property int uid: globalSettings.uid
 		property string name: ""
 		function refreshDisplay()
 		{
