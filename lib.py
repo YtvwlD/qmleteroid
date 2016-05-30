@@ -75,4 +75,4 @@ def get_drinks():
 	return results
 
 def buy_drink(uid, amount):
-	req = requests.get("http://mete/users/{}/deposit?amount=-{}".format(uid, amount))
+	requests.get("http://mete/users/{}/deposit?amount=-{}".format(uid, amount))
