@@ -56,7 +56,7 @@ def get_drinks(url):
 		"name": "Mate",
 		"bottle_size": 0.5,
 		"caffeine": True,
-		"donation_recommended": 1.5,
+		"donation_recommendation": 1.5,
 		"logo": ""
 	}]
 

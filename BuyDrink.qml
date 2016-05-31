@@ -69,7 +69,7 @@ Rectangle
 			{
 				property int did: id
 				property string drink_name: name
-				property double price: donation_recommended
+				property double price: donation_recommendation
 				Image
 				{
 					width: 140
@@ -100,7 +100,7 @@ Rectangle
 				}
 				Text
 				{
-					text: "%1 €".arg(donation_recommended)
+					text: "%1 €".arg(donation_recommendation)
 					anchors.horizontalCenter: parent.horizontalCenter
 				}
 			}
