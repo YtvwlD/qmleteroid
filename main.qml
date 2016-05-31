@@ -56,7 +56,7 @@ Item
 			// Add the directory of this .qml file to the search path
 			addImportPath(Qt.resolvedUrl('.'));
 			// Import the main module and load the data
-			importModule('lib2', function()
+			importModule('lib', function()
 			{
 				//globalSettings.uid = -1;
 				console.log("uid: " + globalSettings.uid);

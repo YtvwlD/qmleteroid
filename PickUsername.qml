@@ -131,7 +131,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-	py.call('lib2.get_users_data', [globalSettings.url], function(result)
+	py.call('lib.get_users_data', [globalSettings.url], function(result)
 	{
 	// Load the received data into the list model
 	for (var i=0; i<result.length; i++)

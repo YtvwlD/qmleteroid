@@ -126,7 +126,7 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
-			py.call("lib2.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
+			py.call("lib.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
 			{
 				//TODO: check if everything went right
 				pageLoader.source = "BuyDrink.qml";
@@ -152,7 +152,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-		py.call("lib2.get_user_data", [globalSettings.url, user.uid], function(result)
+		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
 			console.log("Got information for user " + user.uid + ".");
 			user.name = result["name"];

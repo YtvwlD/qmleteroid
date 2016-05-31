@@ -147,7 +147,7 @@ Rectangle
 		{
 			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");
 			//TODO
-			py.call("lib2.buy_drink", [globalSettings.url, user.uid, drinksGrid.currentItem.price], function()
+			py.call("lib.buy_drink", [globalSettings.url, user.uid, drinksGrid.currentItem.price], function()
 			{
 				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
 				user.balance = user.balance - drinksGrid.currentItem.price;
@@ -173,7 +173,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-		py.call('lib2.get_drinks', [globalSettings.url], function(result)
+		py.call('lib.get_drinks', [globalSettings.url], function(result)
 		{
 			// Load the received data into the list model
 			for (var i=0; i<result.length; i++)
@@ -182,7 +182,7 @@ Rectangle
 			}
 			console.log("Got list of drinks.");
 		});
-		py.call("lib2.get_user_data", [globalSettings.url, user.uid], function(result)
+		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
 			console.log("Got information for user " + user.uid + ".");
 			user.name = result["name"];

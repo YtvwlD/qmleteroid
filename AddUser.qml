@@ -98,7 +98,7 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
-			py.call("lib2.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
+			py.call("lib.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
 			{
 				//TODO: check if everything went right
 				pageLoader.source = "PickUsername.qml";
