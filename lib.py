@@ -35,12 +35,12 @@ def get_user_data(url, uid):
 	return _parseUser(content)
 
 def save_user_data(url, uid, name, balance, email):
-	d = {
-		"name": name,
-		"email": email,
-		"balance": balance
+	p = {
+		"user[name]": name,
+		"user[email]": email,
+		"user[balance]": balance
 	}
-	requests.put("{}/users/{}.json".format(url, uid), data=d)
+	requests.patch("{}/users/{}.json".format(url, uid), params=p)
 
 def add_user(url, name, balance, email):
 	p = {

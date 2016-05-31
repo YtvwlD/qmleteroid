@@ -65,7 +65,6 @@ Rectangle
 		TextInput
 		{
 			id: name_edit
-			text: user.name
 			x: root.width/2
 			y: uid_text.height
 			width: root.width/2
@@ -92,6 +91,7 @@ Rectangle
 		}
 		TextInput
 		{
+			id: balance_edit
 			text: user.balance
 			x: root.width/2
 			y: uid_text.height + name_edit.height + email_edit.height
@@ -126,6 +126,7 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
+			console.log("Saving changes to user: " + user.name);
 			py.call("lib.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
 			{
 				//TODO: check if everything went right
@@ -144,20 +145,20 @@ Rectangle
 	Item
 	{
 		id: user
-		property double balance: 0.00
+		property double balance: parseFloat(balance_edit.text)
 		property int uid: globalSettings.uid
-		property string name: ""
-		property string portrait: ""
-		property string email: ""
+		property string name: name_edit.text
+		property string portrait: "" //TODO: Show Gravatar immediately?
+		property string email: email_edit.text
 	}
 	Component.onCompleted:
 	{
 		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
 			console.log("Got information for user " + user.uid + ".");
-			user.name = result["name"];
-			user.balance = result["balance"];
-			user.email = result["email"];
+			name_edit.text = result["name"];
+			balance_edit.text = result["balance"];
+			email_edit.text = result["email"];
 			user.portrait = result["portrait"];
 		});
 	}
