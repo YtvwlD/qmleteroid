@@ -38,7 +38,6 @@ Rectangle
 		TextInput
 		{
 			id: name_edit
-			text: user.name
 			x: root.width/2
 			width: root.width/2
 		}
@@ -51,7 +50,6 @@ Rectangle
 		TextInput
 		{
 			id: email_edit
-			text: user.email
 			x: root.width/2
 			y: name_edit.height
 			width: root.width/2
@@ -64,7 +62,7 @@ Rectangle
 		}
 		TextInput
 		{
-			text: user.balance
+			id: balance_edit
 			x: root.width/2
 			y: name_edit.height + email_edit.height
 			width: root.width/2
@@ -98,6 +96,7 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
+			console.log("Creating new user: " + user.name);
 			py.call("lib.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
 			{
 				//TODO: check if everything went right
@@ -116,9 +115,9 @@ Rectangle
 	Item
 	{
 		id: user
-		property double balance: 0.00
-		property string name: ""
-		property string portrait: ""
-		property string email: ""
+		property double balance: parseFloat(balance_edit.text)
+		property string name: name_edit.text
+		property string portrait: "" //TODO: Show Gravatar?
+		property string email: email_edit.text
 	}
 }

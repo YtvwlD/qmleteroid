@@ -44,11 +44,11 @@ def save_user_data(url, uid, name, balance, email):
 
 def add_user(url, name, balance, email):
 	p = {
-		"name": name,
-		"balance": balance,
-		"email": email
+		"user[name]": name,
+		"user[balance]": balance,
+		"user[email]": email
 	}
-	requests.post("{}/users".format(url), params=p)
+	requests.post("{}/users.json".format(url), params=p)
 
 def _parseUser(data):
 	return {
