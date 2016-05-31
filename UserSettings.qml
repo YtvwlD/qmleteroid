@@ -1,16 +1,16 @@
 // QMLeteroid - a QML clone of https://github.com/chaosdorf/meteroid
 // Copyright (C) 2016 Niklas Sombert
-// 
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -126,7 +126,7 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
-			py.call("lib2.save_user_data", [user.uid, user.name, user.balance, user.email], function(result)
+			py.call("lib2.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
 			{
 				//TODO: check if everything went right
 				pageLoader.source = "BuyDrink.qml";
@@ -152,7 +152,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-		py.call("lib2.get_user_data", [user.uid], function(result)
+		py.call("lib2.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
 			console.log("Got information for user " + user.uid + ".");
 			user.name = result["name"];

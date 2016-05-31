@@ -20,35 +20,35 @@ import requests
 
 json = JSONDecoder()
 
-def get_users_data():
-	req = requests.get("http://mete/users.json")
+def get_users_data(url):
+	req = requests.get("{}/users.json".format(url))
 	content = json.decode(req.text)
 	results = []
 	for element in content:
 		results.append(_parseUser(element))
 	return results
 
-def get_user_data(uid):
-	req = requests.get("http://mete/users/{}.json".format(uid))
+def get_user_data(url, uid):
+	req = requests.get("{}/users/{}.json".format(url, uid))
 	content = json.decode(req.text)
 	assert content["id"] == uid
 	return _parseUser(content)
 
-def save_user_data(uid, name, balance, email):
+def save_user_data(url, uid, name, balance, email):
 	d = {
 		"name": name,
 		"email": email,
 		"balance": balance
 	}
-	requests.put("http://mete/users/{}.json".format(uid), data=d)
+	requests.put("{}/users/{}.json".format(url, uid), data=d)
 
-def add_user(name, balance, email):
+def add_user(url, name, balance, email):
 	p = {
 		"name": name,
 		"balance": balance,
 		"email": email
 	}
-	requests.post("http://mete/users", params=p)
+	requests.post("{}/users".format(url), params=p)
 
 def _parseUser(data):
 	return {
@@ -59,8 +59,8 @@ def _parseUser(data):
 		"portrait": "http://gravatar.com/avatar/{}".format(md5(data["email"].strip().lower().encode()).hexdigest())
 	}
 
-def get_drinks():
-	req = requests.get("http://mete/drinks.json")
+def get_drinks(url):
+	req = requests.get("{}/drinks.json".format(url))
 	content = json.decode(req.text)
 	results = []
 	for element in content:
@@ -70,9 +70,9 @@ def get_drinks():
 			"bottle_size": element["bottle_size"],
 			"caffeine": element["caffeine"],
 			"donation_recommended": element["donation_recommended"],
-			"logo": ("http://mete/{}".format(element["logo_url"])) if element["logo_url"] else ""
+			"logo": ("{}/{}".format(url, element["logo_url"])) if element["logo_url"] else ""
 		})
 	return results
 
-def buy_drink(uid, amount):
-	requests.get("http://mete/users/{}/deposit?amount=-{}".format(uid, amount))
+def buy_drink(url, uid, amount):
+	requests.get("{}/users/{}/deposit?amount=-{}".format(url, uid, amount))

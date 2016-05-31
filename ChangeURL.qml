@@ -22,52 +22,35 @@ Rectangle
 	id: root
 	width: 360
 	height: 360
+	Text
+	{
+		id: label
+		text: "Please enter the URL of your Mete installation:"
+		height: 30
+		width: root.width
+		verticalAlignment: Text.AlignVCenter
+		horizontalAlignment: Text.AlignHCenter
+	}
 	Rectangle
 	{
 		id: settingsRect
-		anchors.top: parent.top
+		anchors.top: label.bottom
 		anchors.left: parent.left
 		anchors.right: parent.right
 		anchors.margins: 30
 		height: parent.height - buttonsRect.height
 		Text
 		{
-			text: "Name:"
+			text: "URL:"
 			width: root.width/2
 		}
 		TextInput
 		{
-			id: name_edit
-			text: user.name
+			id: urlinput
 			x: root.width/2
 			width: root.width/2
-		}
-		Text
-		{
-			y: name_edit.height
-			text: "Email:"
-			width: root.width/2
-		}
-		TextInput
-		{
-			id: email_edit
-			text: user.email
-			x: root.width/2
-			y: name_edit.height
-			width: root.width/2
-		}
-		Text
-		{
-			y: name_edit.height + email_edit.height
-			text: "Balance:"
-			width: root.width/2
-		}
-		TextInput
-		{
-			text: user.balance
-			x: root.width/2
-			y: name_edit.height + email_edit.height
-			width: root.width/2
+			text: "http://"
+			Component.onCompleted: this.text = globalSettings.url
 		}
 	}
 	Rectangle
@@ -86,7 +69,7 @@ Rectangle
 		{
 			id: cancelButton
 			width: root.width/2
-			x: okButton.width
+			x: root.width/2
 			action: cancelAction
 		}
 	}
@@ -98,11 +81,15 @@ Rectangle
 		iconName: "Ok"
 		onTriggered:
 		{
-			py.call("lib2.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
+			var url = urlinput.text;
+			if(url.substr(-1) === '/') //remove the trailing slash
 			{
-				//TODO: check if everything went right
-				pageLoader.source = "PickUsername.qml";
-			});
+				url = url.substr(0, url.length - 1);
+			}
+			console.log("Saving URL: " + url);
+			globalSettings.url = url;
+			//TODO: Do we need to reset the saved uid here?
+			pageLoader.source = "PickUsername.qml";
 		}
 	}
 	Action
@@ -112,13 +99,5 @@ Rectangle
 		shortcut: StandardKey.Escape
 		iconName: "Cancel"
 		onTriggered: pageLoader.source = "PickUsername.qml"
-	}
-	Item
-	{
-		id: user
-		property double balance: 0.00
-		property string name: ""
-		property string portrait: ""
-		property string email: ""
 	}
 }

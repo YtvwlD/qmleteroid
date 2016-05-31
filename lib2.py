@@ -1,16 +1,16 @@
 # QMLeteroid - a QML clone of https://github.com/chaosdorf/meteroid
 # Copyright (C) 2016 Niklas Sombert
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -38,19 +38,19 @@ fake_users_list = [
 	},
 ]
 
-def get_users_data():
+def get_users_data(url):
 	return fake_users_list
 
-def get_user_data(uid):
+def get_user_data(url, uid):
 	return fake_users_list[uid]
 
-def save_user_data(uid, name, balance, email):
+def save_user_data(url, uid, name, balance, email):
 	print("This is not real.")
 
-def add_user(name, balance, email):
+def add_user(url, name, balance, email):
 	print("This is not real.")
 
-def get_drinks():
+def get_drinks(url):
 	return [{
 		"id": 0,
 		"name": "Mate",
@@ -60,5 +60,5 @@ def get_drinks():
 		"logo": ""
 	}]
 
-def buy_drink(uid, amount):
+def buy_drink(url, uid, amount):
 	print("This is not real.")
