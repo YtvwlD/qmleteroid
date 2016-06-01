@@ -147,7 +147,7 @@ Rectangle
 		{
 			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");
 			//TODO
-			py.call("lib.buy_drink", [globalSettings.url, user.uid, drinksGrid.currentItem.price], function()
+			py.call("lib.buy_drink", [globalSettings.url, user.uid, drinksGrid.currentItem.did], function()
 			{
 				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
 				user.balance = user.balance - drinksGrid.currentItem.price;

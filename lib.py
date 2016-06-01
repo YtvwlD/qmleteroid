@@ -74,5 +74,5 @@ def get_drinks(url):
 		})
 	return results
 
-def buy_drink(url, uid, amount):
-	requests.get("{}/users/{}/deposit?amount=-{}".format(url, uid, amount))
+def buy_drink(url, uid, did):
+	requests.get("{}/users/{}/buy?drink={}".format(url, uid, did))
