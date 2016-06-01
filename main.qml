@@ -29,6 +29,7 @@ Item
 		// Explicitly set the size of the
 		// Loader to the parent item's size
 		anchors.fill: parent
+		anchors.margins: 5
 		id: pageLoader
 	}
 	Settings
