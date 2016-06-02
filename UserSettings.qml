@@ -20,8 +20,6 @@ import QtQuick.Controls 1.4
 Rectangle
 {
 	id: root
-	width: 360
-	height: 360
 	Rectangle
 	{
 		id: imageRect
