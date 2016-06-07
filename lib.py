@@ -67,8 +67,6 @@ def get_drinks(url):
 		results.append({
 			"id": int(element["id"]),
 			"name": element["name"],
-			"bottle_size": element["bottle_size"],
-			"caffeine": element["caffeine"],
 			"donation_recommendation": element["donation_recommendation"],
 			"logo": ("{}/{}".format(url, element["logo_url"])) if element["logo_url"] else ""
 		})

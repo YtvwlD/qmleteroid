@@ -88,16 +88,6 @@ Rectangle
 				}
 				Text
 				{
-					text: "%1 caffeine".arg(caffeine ? "w/" : "w/o")
-					anchors.horizontalCenter: parent.horizontalCenter
-				}
-				Text
-				{
-					text: "%1 l".arg(bottle_size)
-					anchors.horizontalCenter: parent.horizontalCenter
-				}
-				Text
-				{
 					text: "%1 €".arg(donation_recommendation)
 					anchors.horizontalCenter: parent.horizontalCenter
 				}
