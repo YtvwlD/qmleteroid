@@ -84,6 +84,7 @@ Rectangle
 				Text
 				{
 					text: name
+					wrapMode: Text.Wrap
 					anchors.horizontalCenter: parent.horizontalCenter
 				}
 				Text
