@@ -15,15 +15,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import QtQuick 2.5
+import QtQuick.Window 2.2
 import Qt.labs.settings 1.0
 import io.thp.pyotherside 1.4
 
 
-Item
+Window
 {
 	id: window
 	width: 360
 	height: 360
+	title: "QMLeteroid"
 	Loader
 	{
 		// Explicitly set the size of the
