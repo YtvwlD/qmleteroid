@@ -164,19 +164,25 @@ Rectangle
 	{
 		py.call('lib.get_drinks', [globalSettings.url], function(result)
 		{
-			// Load the received data into the list model
-			for (var i=0; i<result.length; i++)
+			if(result)
 			{
-				drinksModel.append(result[i]);
+				// Load the received data into the list model
+				for (var i=0; i<result.length; i++)
+				{
+					drinksModel.append(result[i]);
+				}
+				console.log("Got list of drinks.");
 			}
-			console.log("Got list of drinks.");
 		});
 		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
-			console.log("Got information for user " + user.uid + ".");
-			user.name = result["name"];
-			user.balance = result["balance"];
-			user.refreshDisplay();
+			if(result)
+			{
+				console.log("Got information for user " + user.uid + ".");
+				user.name = result["name"];
+				user.balance = result["balance"];
+				user.refreshDisplay();
+			}
 		});
 	}
 }

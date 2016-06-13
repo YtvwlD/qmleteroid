@@ -131,29 +131,32 @@ Rectangle
 	{
 	py.call('lib.get_users_data', [globalSettings.url], function(result)
 	{
-	// Load the received data into the list model
-	for (var i=0; i<result.length; i++)
+		if(result)
 		{
-			usersModel.append(result[i]);
-		}
-		console.log("Got list of users.");
-		console.log("Saved uid is: " + globalSettings.uid);
-		// Restore the saved settings
-		usersGrid.highlightFollowsCurrentItem = false;
-		var found = false;
-		for (usersGrid.currentIndex = 0; usersGrid.currentIndex < usersGrid.count; usersGrid.currentIndex++)
-		{
-			if (usersGrid.currentItem.uid == globalSettings.uid)
+			// Load the received data into the list model
+			for (var i=0; i<result.length; i++)
 			{
-				found = true;
-				break;
+				usersModel.append(result[i]);
 			}
+			console.log("Got list of users.");
+			console.log("Saved uid is: " + globalSettings.uid);
+			// Restore the saved settings
+			usersGrid.highlightFollowsCurrentItem = false;
+			var found = false;
+			for (usersGrid.currentIndex = 0; usersGrid.currentIndex < usersGrid.count; usersGrid.currentIndex++)
+			{
+				if (usersGrid.currentItem.uid == globalSettings.uid)
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				usersGrid.currentIndex = -1;
+			}
+			usersGrid.highlightFollowsCurrentItem = true;
 		}
-		if (!found)
-		{
-			usersGrid.currentIndex = -1;
-		}
-		usersGrid.highlightFollowsCurrentItem = true;
 	});
 	}
 }

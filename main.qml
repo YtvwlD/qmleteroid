@@ -33,6 +33,7 @@ Window
 		anchors.fill: parent
 		anchors.margins: 5
 		id: pageLoader
+		property string oldurl: ""
 	}
 	Settings
 	{
@@ -54,6 +55,7 @@ Window
 	{
 		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
 		id: py
+		property string errorText: ""
 		Component.onCompleted:
 		{
 			// Add the directory of this .qml file to the search path
@@ -65,6 +67,17 @@ Window
 				console.log("uid: " + globalSettings.uid);
 				pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
 			});
+		}
+		onError:
+		{
+			if(!/Error[.]qml$/.test(pageLoader.source)) //only display one error
+			{
+				console.log("Error: " + traceback)
+				console.log("This has happened in: " + pageLoader.source);
+				this.errorText = traceback;
+				pageLoader.oldurl = pageLoader.source;
+				pageLoader.source = "Error.qml";
+			}
 		}
 	}
 }

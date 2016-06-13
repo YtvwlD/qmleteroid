@@ -153,11 +153,14 @@ Rectangle
 	{
 		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 		{
-			console.log("Got information for user " + user.uid + ".");
-			name_edit.text = result["name"];
-			balance_edit.text = result["balance"];
-			email_edit.text = result["email"];
-			user.portrait = result["portrait"];
+			if(result)
+			{
+				console.log("Got information for user " + user.uid + ".");
+				name_edit.text = result["name"];
+				balance_edit.text = result["balance"];
+				email_edit.text = result["email"];
+				user.portrait = result["portrait"];
+			}
 		});
 	}
 }
