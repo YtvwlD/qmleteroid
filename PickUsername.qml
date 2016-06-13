@@ -99,7 +99,7 @@ Rectangle
 		id: saveAction
 		text: "&Save"
 		shortcut: StandardKey.Enter
-		iconName: "save"
+		iconName: "go-next"
 		onTriggered:
 		{
 			console.log("Saving uid: " + usersGrid.currentItem.uid);
@@ -112,7 +112,7 @@ Rectangle
 		id: addUserAction
 		text: "&Add"
 		//shortcut
-		//iconName
+		iconName: "contact-new"
 		onTriggered: pageLoader.source = "AddUser.qml"
 	}
 	Action
@@ -120,7 +120,7 @@ Rectangle
 		id: changeURLAction
 		text: "Change &URL"
 		//shortcut
-		//iconName
+		iconName: "preferences-other"
 		onTriggered: pageLoader.source = "ChangeURL.qml"
 	}
 	ListModel

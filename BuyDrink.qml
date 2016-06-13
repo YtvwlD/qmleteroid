@@ -106,7 +106,7 @@ Rectangle
 	{
 		id: switchUserAction
 		text: "S&witch"
-		//iconName: ""
+		iconName: "go-previous"
 		//shortcut
 		onTriggered:
 		{
@@ -118,7 +118,7 @@ Rectangle
 	{
 		id: editUserAction
 		text: "&Edit"
-		//iconName: ""
+		iconName: "preferences-other"
 		//shortcut
 		onTriggered:
 		{
@@ -131,7 +131,7 @@ Rectangle
 		id: buyAction
 		text: "&Buy"
 		shortcut: StandardKey.Enter
-		//iconName: ""
+		iconName: "go-next"
 		onTriggered:
 		{
 			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");

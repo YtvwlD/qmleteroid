@@ -91,7 +91,7 @@ Rectangle
 		id: okAction
 		text: "O&k"
 		shortcut: StandardKey.Enter
-		iconName: "Ok"
+		iconName: "go-next"
 		onTriggered:
 		{
 			console.log("Creating new user: " + user.name);
@@ -107,7 +107,7 @@ Rectangle
 		id: cancelAction
 		text: "&Cancel"
 		shortcut: StandardKey.Escape
-		iconName: "Cancel"
+		iconName: "go-previous"
 		onTriggered: pageLoader.source = "PickUsername.qml"
 	}
 	Item

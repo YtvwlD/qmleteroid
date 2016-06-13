@@ -78,7 +78,7 @@ Rectangle
 		id: okAction
 		text: "O&k"
 		shortcut: StandardKey.Enter
-		iconName: "Ok"
+		iconName: "go-next"
 		onTriggered:
 		{
 			var url = urlinput.text;
@@ -97,7 +97,7 @@ Rectangle
 		id: cancelAction
 		text: "&Cancel"
 		shortcut: StandardKey.Escape
-		iconName: "Cancel"
+		iconName: "go-previous"
 		onTriggered: pageLoader.source = py.isError ? "Error.qml" : "PickUsername.qml";
 	}
 }

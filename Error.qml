@@ -73,7 +73,7 @@ Rectangle
 		id: backAction
 		text: "&Back"
 		//shortcut
-		//iconName
+		iconName: "go-previous"
 		onTriggered:
 		{
 			console.log("Error screen: Going back to: " + pageLoader.oldurl);
@@ -87,7 +87,7 @@ Rectangle
 		id: urlAction
 		text: "&Change URL"
 		//shortcut
-		//iconName
+		iconName: "preferences-other"
 		onTriggered:
 		{
 			console.log("Changing URL...");
