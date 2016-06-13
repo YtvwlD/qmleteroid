@@ -57,8 +57,15 @@ Rectangle
 		Button
 		{
 			id: backButton
-			width: parent.width
+			width: parent.width/2
 			action: backAction
+		}
+		Button
+		{
+			id: urlButton
+			x: backButton.width
+			width: parent.width/2
+			action: urlAction
 		}
 	}
 	Action
@@ -70,8 +77,21 @@ Rectangle
 		onTriggered:
 		{
 			console.log("Error screen: Going back to: " + pageLoader.oldurl);
+			py.isError = false;
 			pageLoader.source = pageLoader.oldurl;
 			pageLoader.oldurl = "";
+		}
+	}
+	Action
+	{
+		id: urlAction
+		text: "&Change URL"
+		//shortcut
+		//iconName
+		onTriggered:
+		{
+			console.log("Changing URL...");
+			pageLoader.source = "ChangeURL.qml";
 		}
 	}
 }

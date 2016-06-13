@@ -56,6 +56,7 @@ Window
 		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
 		id: py
 		property string errorText: ""
+		property bool isError: false
 		Component.onCompleted:
 		{
 			// Add the directory of this .qml file to the search path
@@ -70,8 +71,9 @@ Window
 		}
 		onError:
 		{
-			if(!/Error[.]qml$/.test(pageLoader.source)) //only display one error
+			if(!this.isError) //only display one error
 			{
+				this.isError = true;
 				console.log("Error: " + traceback)
 				console.log("This has happened in: " + pageLoader.source);
 				this.errorText = traceback;
