@@ -26,6 +26,7 @@ Window
 	width: 360
 	height: 360
 	title: "QMLeteroid"
+	visible: true
 	Loader
 	{
 		// Explicitly set the size of the

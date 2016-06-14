@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Error.qml</file>
+        <file>ChangeURL.qml</file>
+        <file>BuyDrink.qml</file>
+        <file>lib.py</file>
+        <file>PickUsername.qml</file>
+        <file>UserSettings.qml</file>
+    </qresource>
+</RCC>
