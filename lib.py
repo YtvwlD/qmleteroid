@@ -48,7 +48,9 @@ def add_user(url, name, balance, email):
 		"user[balance]": balance,
 		"user[email]": email
 	}
-	requests.post("{}/users.json".format(url), params=p)
+	req = requests.post("{}/users.json".format(url), params=p)
+	content = json.decode(req.text)
+	return _parseUser(content)
 
 def _parseUser(data):
 	return {

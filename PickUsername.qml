@@ -112,7 +112,11 @@ Rectangle
 		text: "&Add"
 		//shortcut
 		iconName: "contact-new"
-		onTriggered: pageLoader.source = "AddUser.qml"
+		onTriggered:
+		{
+			globalSettings.uid = -1;
+			pageLoader.source = "UserSettings.qml";
+		}
 	}
 	Action
 	{

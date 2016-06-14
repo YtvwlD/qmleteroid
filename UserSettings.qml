@@ -114,12 +114,27 @@ Rectangle
 		iconName: "go-next"
 		onTriggered:
 		{
-			console.log("Saving changes to user: " + user.name);
-			py.call("lib.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
+			if(user.uid == -1) //new user
 			{
-				//TODO: check if everything went right
-				pageLoader.source = "BuyDrink.qml";
-			});
+				console.log("Creating new user: " + user.name);
+				py.call("lib.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
+				{
+					if(result)
+					{
+						globalSettings.uid = result["id"];
+						pageLoader.source = "BuyDrink.qml";
+					}
+				});
+			}
+			else
+			{
+				console.log("Saving changes to user: " + user.name);
+				py.call("lib.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
+				{
+					//TODO: check if everything went right
+					pageLoader.source = "BuyDrink.qml";
+				});
+			}
 		}
 	}
 	Action
@@ -128,7 +143,17 @@ Rectangle
 		text: "&Cancel"
 		shortcut: StandardKey.Escape
 		iconName: "go-previous"
-		onTriggered: pageLoader.source = "BuyDrink.qml"
+		onTriggered:
+		{
+			if(user.uid == -1) //new user
+			{
+				pageLoader.source = "PickUsername.qml";
+			}
+			else
+			{
+				pageLoader.source = "BuyDrink.qml";
+			}
+		}
 	}
 	Item
 	{
@@ -151,16 +176,19 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-		py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
+		if (user.uid != -1) //existing user
 		{
-			if(result)
+			py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
 			{
-				console.log("Got information for user " + user.uid + ".");
-				name_edit.text = result["name"];
-				balance_edit.text = result["balance"];
-				email_edit.text = result["email"];
-				user.refreshGravatar();
-			}
-		});
+				if(result)
+				{
+					console.log("Got information for user " + user.uid + ".");
+					name_edit.text = result["name"];
+					balance_edit.text = result["balance"];
+					email_edit.text = result["email"];
+				}
+			});
+		}
+		user.refreshGravatar();
 	}
 }
