@@ -56,8 +56,11 @@ def _parseUser(data):
 		"name": data["name"],
 		"balance": data["balance"],
 		"email": data["email"],
-		"portrait": "http://gravatar.com/avatar/{}".format(md5(data["email"].strip().lower().encode()).hexdigest())
+		"portrait": get_gravatar_url(data["email"])
 	}
+
+def get_gravatar_url(email):
+	return "http://gravatar.com/avatar/{}".format(md5(email.strip().lower().encode()).hexdigest())
 
 def get_drinks(url):
 	req = requests.get("{}/drinks.json".format(url))

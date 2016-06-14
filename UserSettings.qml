@@ -73,6 +73,7 @@ Rectangle
 			id: email_edit
 			text: user.email
 			Layout.fillWidth: true
+			onEditingFinished: user.refreshGravatar()
 		}
 		Text
 		{
@@ -134,9 +135,19 @@ Rectangle
 		id: user
 		property double balance: parseFloat(balance_edit.text)
 		property int uid: globalSettings.uid
-		property string name: name_edit.text
-		property string portrait: "" //TODO: Show Gravatar immediately?
-		property string email: email_edit.text
+		property alias name: name_edit.text
+		property string portrait: ""
+		property alias email: email_edit.text
+		function refreshGravatar()
+		{
+			py.call("lib.get_gravatar_url", [user.email], function(result)
+			{
+				if(result)
+				{
+					user.portrait = result;
+				}
+			});
+		}
 	}
 	Component.onCompleted:
 	{
@@ -148,7 +159,7 @@ Rectangle
 				name_edit.text = result["name"];
 				balance_edit.text = result["balance"];
 				email_edit.text = result["email"];
-				user.portrait = result["portrait"];
+				user.refreshGravatar();
 			}
 		});
 	}
