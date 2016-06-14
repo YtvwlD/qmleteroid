@@ -33,7 +33,7 @@ Rectangle
 			text: "Name:"
 			width: root.width/2
 		}
-		TextInput
+		TextField
 		{
 			id: name_edit
 			x: root.width/2
@@ -45,7 +45,7 @@ Rectangle
 			text: "Email:"
 			width: root.width/2
 		}
-		TextInput
+		TextField
 		{
 			id: email_edit
 			x: root.width/2
@@ -58,7 +58,7 @@ Rectangle
 			text: "Balance:"
 			width: root.width/2
 		}
-		TextInput
+		TextField
 		{
 			id: balance_edit
 			x: root.width/2

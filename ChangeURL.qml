@@ -44,7 +44,7 @@ Rectangle
 			text: "URL:"
 			width: root.width/2
 		}
-		TextInput
+		TextField
 		{
 			id: urlinput
 			x: root.width/2
