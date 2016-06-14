@@ -25,8 +25,8 @@ Rectangle
 		anchors.top: parent.top
 		anchors.left: parent.left
 		anchors.right: parent.right
+		anchors.bottom: buttonsRect.top
 		anchors.margins: 30
-		height: parent.height - buttonsRect.height
 		Text
 		{
 			id: labelText
@@ -52,7 +52,7 @@ Rectangle
 		id: buttonsRect
 		y: parent.height - this.height
 		width: parent.width
-		height: okButton.height
+		height: backButton.height
 		Button
 		{
 			id: backButton
