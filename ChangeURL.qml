@@ -57,7 +57,7 @@ Rectangle
 		id: buttonsRect
 		y: parent.height - this.height
 		width: parent.width
-		height: 40
+		height: okButton.height
 		Button
 		{
 			id: okButton
