@@ -71,7 +71,6 @@ Rectangle
 		TextField
 		{
 			id: email_edit
-			text: user.email
 			Layout.fillWidth: true
 			onEditingFinished: user.refreshGravatar()
 		}
@@ -82,7 +81,6 @@ Rectangle
 		TextField
 		{
 			id: balance_edit
-			text: user.balance
 			Layout.fillWidth: true
 		}
 	}
