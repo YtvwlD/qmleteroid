@@ -16,53 +16,45 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.2
 
 Rectangle
 {
-	Rectangle
+	GridLayout
 	{
 		id: settingsRect
+		columns: 2
+		columnSpacing: 20
 		anchors.top: parent.top
 		anchors.left: parent.left
 		anchors.right: parent.right
 		anchors.margins: 30
-		height: parent.height - buttonsRect.height
 		Text
 		{
 			text: "Name:"
-			width: parent.width/2
 		}
 		TextField
 		{
 			id: name_edit
-			x: parent.width/2
-			width: parent.width/2
+			Layout.fillWidth: true
 		}
 		Text
 		{
-			y: name_edit.height
 			text: "Email:"
-			width: parent.width/2
 		}
 		TextField
 		{
 			id: email_edit
-			x: parent.width/2
-			y: name_edit.height
-			width: parent.width/2
+			Layout.fillWidth: true
 		}
 		Text
 		{
-			y: name_edit.height + email_edit.height
 			text: "Balance:"
-			width: parent.width/2
 		}
 		TextField
 		{
 			id: balance_edit
-			x: parent.width/2
-			y: name_edit.height + email_edit.height
-			width: parent.width/2
+			Layout.fillWidth: true
 		}
 	}
 	Rectangle
