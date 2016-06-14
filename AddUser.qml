@@ -19,7 +19,6 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
-	id: root
 	Rectangle
 	{
 		id: settingsRect
@@ -31,57 +30,57 @@ Rectangle
 		Text
 		{
 			text: "Name:"
-			width: root.width/2
+			width: parent.width/2
 		}
 		TextField
 		{
 			id: name_edit
-			x: root.width/2
-			width: root.width/2
+			x: parent.width/2
+			width: parent.width/2
 		}
 		Text
 		{
 			y: name_edit.height
 			text: "Email:"
-			width: root.width/2
+			width: parent.width/2
 		}
 		TextField
 		{
 			id: email_edit
-			x: root.width/2
+			x: parent.width/2
 			y: name_edit.height
-			width: root.width/2
+			width: parent.width/2
 		}
 		Text
 		{
 			y: name_edit.height + email_edit.height
 			text: "Balance:"
-			width: root.width/2
+			width: parent.width/2
 		}
 		TextField
 		{
 			id: balance_edit
-			x: root.width/2
+			x: parent.width/2
 			y: name_edit.height + email_edit.height
-			width: root.width/2
+			width: parent.width/2
 		}
 	}
 	Rectangle
 	{
 		id: buttonsRect
-		y: root.height - this.height
-		width: root.width
+		y: parent.height - this.height
+		width: parent.width
 		height: 40
 		Button
 		{
 			id: okButton
-			width: root.width/2
+			width: parent.width/2
 			action: okAction
 		}
 		Button
 		{
 			id: cancelButton
-			width: root.width/2
+			width: parent.width/2
 			x: okButton.width
 			action: cancelAction
 		}

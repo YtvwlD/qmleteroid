@@ -19,7 +19,6 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
-	id: root
 	width: 360
 	height: 360
 	Text
@@ -27,7 +26,7 @@ Rectangle
 		id: label
 		text: "Please enter the URL of your Mete installation:"
 		height: 30
-		width: root.width
+		width: parent.width
 		verticalAlignment: Text.AlignVCenter
 		horizontalAlignment: Text.AlignHCenter
 	}
@@ -42,13 +41,13 @@ Rectangle
 		Text
 		{
 			text: "URL:"
-			width: root.width/2
+			width: parent.width/2
 		}
 		TextField
 		{
 			id: urlinput
-			x: root.width/2
-			width: root.width/2
+			x: parent.width/2
+			width: parent.width/2
 			text: "http://"
 			Component.onCompleted: this.text = globalSettings.url
 		}
@@ -56,20 +55,20 @@ Rectangle
 	Rectangle
 	{
 		id: buttonsRect
-		y: root.height - this.height
-		width: root.width
+		y: parent.height - this.height
+		width: parent.width
 		height: 40
 		Button
 		{
 			id: okButton
-			width: root.width/2
+			width: parent.width/2
 			action: okAction
 		}
 		Button
 		{
 			id: cancelButton
-			width: root.width/2
-			x: root.width/2
+			width: parent.width/2
+			x: parent.width/2
 			action: cancelAction
 		}
 	}

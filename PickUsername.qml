@@ -19,17 +19,16 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
-	id: root
 	Rectangle
 	{
-		width: root.width
+		width: parent.width
 		height: addUserButton.height
 		Text
 		{
 			id: label
 			text: "Select your account:"
 			height: parent.height
-			width: root.width - addUserButton.width - changeURLButton.width
+			width: parent.width - addUserButton.width - changeURLButton.width
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
 		}
@@ -50,8 +49,8 @@ Rectangle
 	{
 		id: usersRect
 		y: label.height
-		width: root.width
-		height: root.height - label.height - saveButton.height
+		width: parent.width
+		height: parent.height - label.height - saveButton.height
 		GridView
 		{
 			id: usersGrid
@@ -90,7 +89,7 @@ Rectangle
 	Button
 	{
 		id: saveButton
-		width: root.width
+		width: parent.width
 		y: label.height + usersRect.height
 		action: saveAction
 	}

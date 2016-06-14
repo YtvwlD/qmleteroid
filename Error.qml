@@ -19,7 +19,6 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
-	id: root
 	Rectangle
 	{
 		id: errorRect
@@ -51,8 +50,8 @@ Rectangle
 	Rectangle
 	{
 		id: buttonsRect
-		y: root.height - this.height
-		width: root.width
+		y: parent.height - this.height
+		width: parent.width
 		height: 40
 		Button
 		{

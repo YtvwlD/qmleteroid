@@ -19,17 +19,16 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
-	id: root
 	Rectangle
 	{
-		width: root.width
+		width: parent.width
 		height: switchUserButton.height
 		Text
 		{
 			id: label
 			text: "Loading..."
 			height: parent.height
-			width: root.width - switchUserButton.width - editUserButton.width
+			width: parent.width - switchUserButton.width - editUserButton.width
 			verticalAlignment: Text.AlignVCenter
 			horizontalAlignment: Text.AlignHCenter
 		}
@@ -50,8 +49,8 @@ Rectangle
 	{
 		id: drinksRect
 		y: label.height
-		width: root.width
-		height: root.height - label.height - buyButton.height
+		width: parent.width
+		height: parent.height - label.height - buyButton.height
 		GridView
 		{
 			id: drinksGrid
@@ -98,7 +97,7 @@ Rectangle
 	Button
 	{
 		id: buyButton
-		width: root.width
+		width: parent.width
 		y: label.height + drinksRect.height
 		action: buyAction
 	}
