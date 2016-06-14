@@ -184,9 +184,13 @@ Rectangle
 					name_edit.text = result["name"];
 					balance_edit.text = result["balance"];
 					email_edit.text = result["email"];
+					user.refreshGravatar();
 				}
 			});
 		}
-		user.refreshGravatar();
+		else
+		{
+			user.refreshGravatar();
+		}
 	}
 }
