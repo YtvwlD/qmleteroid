@@ -52,25 +52,20 @@ Window
 		Qt.application.organization = "Chaosdorf";
 		Qt.application.domain = "chaosdorf.de";
 	}
-	Python
+	WorkerScript
 	{
-		//via https://pyotherside.readthedocs.io/en/latest/#loading-listmodel-data-from-python
-		id: py
+		id: lib
 		property string errorText: ""
 		property bool isError: false
+		property var callbacks: {}
+		source: "lib.js"
 		Component.onCompleted:
 		{
-			// Add the directory of this .qml file to the search path
-			addImportPath(Qt.resolvedUrl('.'));
-			// Import the main module and load the data
-			importModule('lib', function()
-			{
-				//globalSettings.uid = -1;
-				console.log("uid: " + globalSettings.uid);
-				pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
-			});
+			this.callbacks = {};
+			console.log("uid: " + globalSettings.uid);
+			pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
 		}
-		onError:
+		/*onError:
 		{
 			if(!this.isError) //only display one error
 			{
@@ -81,6 +76,26 @@ Window
 				pageLoader.oldurl = pageLoader.source;
 				pageLoader.source = "Error.qml";
 			}
+		}*/
+		onMessage:
+		{
+			var reply = messageObject;
+			console.log("Got a reply: " + reply);
+			console.log("Firing the callback with the id: " + reply["rand"]);
+			this.callbacks[reply["rand"]](reply["data"]);
+			this.callbacks[reply["rand"]] = null;
+		}
+		function call_async(func, params, callback)
+		{
+			console.log("Calling: " + func);
+			var rand = Math.ceil(Math.random() * 1000000);
+			this.callbacks[rand] = callback;
+			console.log("rand is: " + rand);
+			this.sendMessage({
+				"func": func,
+				"params": params,
+				"rand": rand
+			});
 		}
 	}
 }

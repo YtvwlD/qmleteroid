@@ -115,7 +115,7 @@ Rectangle
 			if(user.uid == -1) //new user
 			{
 				console.log("Creating new user: " + user.name);
-				py.call("lib.add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
+				lib.call_async("add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
 				{
 					if(result)
 					{
@@ -127,7 +127,7 @@ Rectangle
 			else
 			{
 				console.log("Saving changes to user: " + user.name);
-				py.call("lib.save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
+				lib.call_async("save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
 				{
 					//TODO: check if everything went right
 					pageLoader.source = "BuyDrink.qml";
@@ -163,7 +163,7 @@ Rectangle
 		property alias email: email_edit.text
 		function refreshGravatar()
 		{
-			py.call("lib.get_gravatar_url", [user.email], function(result)
+			lib.call_async("get_gravatar_url", [user.email], function(result)
 			{
 				if(result)
 				{
@@ -176,7 +176,7 @@ Rectangle
 	{
 		if (user.uid != -1) //existing user
 		{
-			py.call("lib.get_user_data", [globalSettings.url, user.uid], function(result)
+			lib.call_async("get_user_data", [globalSettings.url, user.uid], function(result)
 			{
 				if(result)
 				{

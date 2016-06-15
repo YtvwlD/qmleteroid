@@ -88,7 +88,7 @@ Rectangle
 			console.log("Saving URL: " + url);
 			globalSettings.url = url;
 			//TODO: Do we need to reset the saved uid here?
-			pageLoader.source = py.isError ? "Error.qml" : "PickUsername.qml";
+			pageLoader.source = lib.isError ? "Error.qml" : "PickUsername.qml";
 		}
 	}
 	Action
@@ -97,6 +97,6 @@ Rectangle
 		text: "&Cancel"
 		shortcut: StandardKey.Escape
 		iconName: "go-previous"
-		onTriggered: pageLoader.source = py.isError ? "Error.qml" : "PickUsername.qml";
+		onTriggered: pageLoader.source = lib.isError ? "Error.qml" : "PickUsername.qml";
 	}
 }

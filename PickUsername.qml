@@ -132,7 +132,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-	py.call('lib.get_users_data', [globalSettings.url], function(result)
+	lib.call_async('get_users_data', [globalSettings.url], function(result)
 	{
 		if(result)
 		{
