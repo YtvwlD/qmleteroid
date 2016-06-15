@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=QMLeteroid
+Comment=a client for Mete
+Exec=qmlscene /usr/lib/qmleteroid/main.qml
+Categories=Qt;Utility;
