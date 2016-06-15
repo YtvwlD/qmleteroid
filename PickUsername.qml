@@ -133,9 +133,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-	Library.get_users_data(globalSettings.url, function(result)
-	{
-		if(result)
+		Library.get_users_data(globalSettings.url, function(result)
 		{
 			// Load the received data into the list model
 			for (var i=0; i<result.length; i++)
@@ -160,7 +158,6 @@ Rectangle
 				usersGrid.currentIndex = -1;
 			}
 			usersGrid.highlightFollowsCurrentItem = true;
-		}
-	});
+		});
 	}
 }

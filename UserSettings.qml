@@ -118,17 +118,14 @@ Rectangle
 				console.log("Creating new user: " + user.name);
 				Library.add_user(globalSettings.url, user.name, user.balance, user.email, function(result)
 				{
-					if(result)
-					{
-						globalSettings.uid = result["id"];
-						pageLoader.source = "BuyDrink.qml";
-					}
+					globalSettings.uid = result["id"];
+					pageLoader.source = "BuyDrink.qml";
 				});
 			}
 			else
 			{
 				console.log("Saving changes to user: " + user.name);
-			Library.save_user_data(globalSettings.url, user.uid, user.name, user.balance, user.email, function(result)
+				Library.save_user_data(globalSettings.url, user.uid, user.name, user.balance, user.email, function(result)
 				{
 					//TODO: check if everything went right
 					pageLoader.source = "BuyDrink.qml";
@@ -173,14 +170,11 @@ Rectangle
 		{
 			Library.get_user_data(globalSettings.url, user.uid, function(result)
 			{
-				if(result)
-				{
-					console.log("Got information for user " + user.uid + ".");
-					name_edit.text = result["name"];
-					balance_edit.text = result["balance"];
-					email_edit.text = result["email"];
-					user.refreshGravatar();
-				}
+				console.log("Got information for user " + user.uid + ".");
+				name_edit.text = result["name"];
+				balance_edit.text = result["balance"];
+				email_edit.text = result["email"];
+				user.refreshGravatar();
 			});
 		}
 		else

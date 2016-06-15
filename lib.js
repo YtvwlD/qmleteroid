@@ -15,8 +15,15 @@ function _http_json(method, url, params, callback)
 			console.log("Firing callback.");
 			callback(JSON.parse(req.responseText));
 		}
+		else if(req.status == 204)
+		{
+			console.log("Got a successful response.");
+			console.log("Firing callback.");
+			callback();
+		}
 		else
 		{
+			console.log("Response: " + req.status);
 			main.error(); //TODO: detailed message
 		}
 	};
@@ -41,7 +48,9 @@ function get_user_data(url, uid, callback)
 	_http_json("GET", url + "/users/" + uid + ".json", null, function(content)
 	{
 		//assert(content["id"] == uid);
-		callback(_parseUser(content));
+		var result = _parseUser(content);
+		console.log(result);
+		callback(result);
 	});
 }
 
@@ -73,14 +82,15 @@ function add_user(url, name, balance, email, callback)
 
 function _parseUser(data)
 {
-	return
-	{
+	var result = {
 		"id": data["id"],
 		"name": data["name"],
 		"balance": data["balance"],
 		"email": data["email"],
 		"portrait": get_gravatar_url(data["email"])
 	};
+	console.log(result);
+	return result;
 }
 
 function get_gravatar_url(email)
@@ -112,7 +122,7 @@ function get_drinks(url, callback)
 
 function buy_drink(url, uid, did, callback)
 {
-	_http_json("GET", url + "/users/" + uid + "/buy?drink=" + did, null, function(content)
+	_http_json("GET", url + "/users/" + uid + "/buy.json?drink=" + did, null, function(content)
 	{
 		callback(content); //TODO
 	});

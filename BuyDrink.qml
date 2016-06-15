@@ -164,25 +164,19 @@ Rectangle
 	{
 		Library.get_drinks(globalSettings.url, function(result)
 		{
-			if(result)
+			// Load the received data into the list model
+			for (var i=0; i<result.length; i++)
 			{
-				// Load the received data into the list model
-				for (var i=0; i<result.length; i++)
-				{
-					drinksModel.append(result[i]);
-				}
-				console.log("Got list of drinks.");
+				drinksModel.append(result[i]);
 			}
+			console.log("Got list of drinks.");
 		});
 		Library.get_user_data(globalSettings.url, user.uid, function(result)
 		{
-			if(result)
-			{
-				console.log("Got information for user " + user.uid + ".");
-				user.name = result["name"];
-				user.balance = result["balance"];
-				user.refreshDisplay();
-			}
+			console.log("Got information for user " + user.uid + ".");
+			user.name = result["name"];
+			user.balance = result["balance"];
+			user.refreshDisplay();
 		});
 	}
 }
