@@ -17,7 +17,6 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
 import Qt.labs.settings 1.0
-import io.thp.pyotherside 1.4
 
 
 Window
@@ -52,50 +51,28 @@ Window
 		Qt.application.organization = "Chaosdorf";
 		Qt.application.domain = "chaosdorf.de";
 	}
-	WorkerScript
+	Item
 	{
-		id: lib
+		id: main
 		property string errorText: ""
 		property bool isError: false
-		property var callbacks: {}
-		source: "lib.js"
 		Component.onCompleted:
 		{
-			this.callbacks = {};
 			console.log("uid: " + globalSettings.uid);
 			pageLoader.source = globalSettings.uid == -1 ? "PickUsername.qml" : "BuyDrink.qml";
 		}
-		/*onError:
+		function error()
 		{
 			if(!this.isError) //only display one error
 			{
 				this.isError = true;
-				console.log("Error: " + traceback)
+				//TODO: detailed message
+				//console.log("Error: " + traceback)
 				console.log("This has happened in: " + pageLoader.source);
-				this.errorText = traceback;
+				//this.errorText = traceback;
 				pageLoader.oldurl = pageLoader.source;
 				pageLoader.source = "Error.qml";
 			}
-		}*/
-		onMessage:
-		{
-			var reply = messageObject;
-			console.log("Got a reply: " + reply);
-			console.log("Firing the callback with the id: " + reply["rand"]);
-			this.callbacks[reply["rand"]](reply["data"]);
-			this.callbacks[reply["rand"]] = null;
-		}
-		function call_async(func, params, callback)
-		{
-			console.log("Calling: " + func);
-			var rand = Math.ceil(Math.random() * 1000000);
-			this.callbacks[rand] = callback;
-			console.log("rand is: " + rand);
-			this.sendMessage({
-				"func": func,
-				"params": params,
-				"rand": rand
-			});
 		}
 	}
 }

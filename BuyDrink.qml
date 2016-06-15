@@ -16,6 +16,7 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import "lib.js" as Library
 
 Rectangle
 {
@@ -135,13 +136,13 @@ Rectangle
 		{
 			console.log("Buying " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€...");
 			//TODO
-			lib.call_async("buy_drink", [globalSettings.url, user.uid, drinksGrid.currentItem.did], function()
+			Library.buy_drink(globalSettings.url, user.uid, drinksGrid.currentItem.did, function(response)
 			{
 				console.log("Bought " + drinksGrid.currentItem.drink_name + " for " + drinksGrid.currentItem.price + "€.");
 				user.balance = user.balance - drinksGrid.currentItem.price;
 				console.log("New balance: " + user.balance + "€");
 				user.refreshDisplay();
-			})
+			});
 		}
 	}
 	Item
@@ -161,7 +162,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-		lib.call_async('get_drinks', [globalSettings.url], function(result)
+		Library.get_drinks(globalSettings.url, function(result)
 		{
 			if(result)
 			{
@@ -173,7 +174,7 @@ Rectangle
 				console.log("Got list of drinks.");
 			}
 		});
-		lib.call_async("get_user_data", [globalSettings.url, user.uid], function(result)
+		Library.get_user_data(globalSettings.url, user.uid, function(result)
 		{
 			if(result)
 			{

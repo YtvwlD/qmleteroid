@@ -16,6 +16,7 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import "lib.js" as Library
 
 Rectangle
 {
@@ -132,7 +133,7 @@ Rectangle
 	}
 	Component.onCompleted:
 	{
-	lib.call_async('get_users_data', [globalSettings.url], function(result)
+	Library.get_users_data(globalSettings.url, function(result)
 	{
 		if(result)
 		{

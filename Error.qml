@@ -43,7 +43,7 @@ Rectangle
 			Text
 			{
 				id: exceptionText
-				text: lib.errorText
+				text: main.errorText
 			}
 		}
 	}
@@ -76,7 +76,7 @@ Rectangle
 		onTriggered:
 		{
 			console.log("Error screen: Going back to: " + pageLoader.oldurl);
-			lib.isError = false;
+			main.isError = false;
 			pageLoader.source = pageLoader.oldurl;
 			pageLoader.oldurl = "";
 		}

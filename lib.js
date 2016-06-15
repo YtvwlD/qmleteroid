@@ -1,87 +1,74 @@
-WorkerScript.onMessage = function(message)
+function _http_json(method, url, params, callback)
 {
-	var func = message["func"];
-	var params = message["params"];
-	var rand = message["rand"];
-	var result = null;
-	if(func == "get_users_data")
+	console.log("Requesting: " + url);
+	var req = new XMLHttpRequest();
+	req.open(method, url, true);
+	req.onreadystatechange = function()
 	{
-		result = get_users_data(params[0]);
-	}
-	if(func == "get_user_data")
-	{
-		result = get_user_data(params[0], params[1]);
-	}
-	if(func == "save_user_data")
-	{
-		result = save_user_data(params[0], params[1], params[2], params[3], params[4]);
-	}
-	if(func == "add_user")
-	{
-		result = add_user(params[0], params[1], params[2], params[3]);
-	}
-	if(func == "get_gravatar_url")
-	{
-		result = get_gravatar_url(params[0]);
-	}
-	if(func == "get_drinks")
-	{
-		result = get_drinks(params[0]);
-	}
-	if(func == "buy_drink")
-	{
-		result = buy_drink(params[0], params[1], params[2]);
-	}
-	WorkerScript.sendMessage({"rand": rand, "data": result});
+		if(req.readyState != 4)
+		{
+			return;
+		}
+		if(req.status == 200) //TODO
+		{
+			console.log("Got reponse: " + req.responseText);
+			console.log("Firing callback.");
+			callback(JSON.parse(req.responseText));
+		}
+		else
+		{
+			main.error(); //TODO: detailed message
+		}
+	};
+	req.send(params ? new FormData(params) : null);
 }
 
-function get_users_data(url)
+function get_users_data(url, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("GET", url + "/users.json", false);
-	req.send();
-	var content = JSON.parse(req.responseText);
-	var results = [];
-	content.forEach(function(element)
+	_http_json("GET", url + "/users.json", null, function(content)
 	{
-		results.push(_parseUser(element));
+		var results = [];
+		content.forEach(function(element)
+		{
+			results.push(_parseUser(element));
+		});
+		callback(results);
 	});
-	return(results);
 }
 
-function get_user_data(url, uid)
+function get_user_data(url, uid, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("GET", url + "/users/" + uid + ".json", false);
-	req.send();
-	var content = JSON.parse(req.responseText);
-	//assert(content["id"] == uid);
-	return _parseUser(content);
+	_http_json("GET", url + "/users/" + uid + ".json", null, function(content)
+	{
+		//assert(content["id"] == uid);
+		callback(_parseUser(content));
+	});
 }
 
-function save_user_data(url, uid, name, balance, email)
+function save_user_data(url, uid, name, balance, email, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("PATCH", url + "/users/" + uid + ".json", false);
-	req.send({
+	var params = {
 		"user[name]": name,
 		"user[balance]": balance,
 		"user[email]": email
+	};
+	_http_json("PATCH", url + "/users/" + uid + ".json", params, function(content)
+	{
+		callback(content); //TODO
 	});
-	//TODO
 }
 
-function add_user(url, name, balance, email)
+function add_user(url, name, balance, email, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("POST", url + "/users.json", false);
-	req.send({
+	var params = {
 		"user[name]": name,
 		"user[balance]": balance,
 		"user[email]": email
+	};
+	_http_json("POST", url + "/users.json", params, function(content)
+	{
+		callback(_parseUser(content));
 	});
-	var content = JSON.parse(req.responseText);
-	return _parseUser(content);
 }
 
 function _parseUser(data)
@@ -105,29 +92,28 @@ function get_gravatar_url(email)
 	return "http://gravatar.com/avatar/" + hash;
 }
 
-function get_drinks(url)
+function get_drinks(url, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("GET", url + "/drinks.json", false);
-	req.send();
-	var results = [];
-	var content = JSON.parse(req.responseText);
-	content.forEach(function(element)
+	_http_json("GET", url + "/drinks.json", null, function(content)
 	{
-		results.push({
-			"id": element["id"],
-			"name": element["name"],
-			"donation_recommendation": element["donation_recommendation"],
-			"logo": element["logo_url"] ? (url + "/" + element["logo_url"]) : ""
+		var results = [];
+		content.forEach(function(element)
+		{
+			results.push({
+				"id": element["id"],
+				"name": element["name"],
+				"donation_recommendation": element["donation_recommendation"],
+				"logo": element["logo_url"] ? (url + "/" + element["logo_url"]) : ""
+			});
 		});
+		callback(results);
 	});
-	return results;
 }
 
-function buy_drink(url, uid, did)
+function buy_drink(url, uid, did, callback)
 {
-	var req = new XMLHttpRequest();
-	req.open("GET", url + "/users/" + uid + "/buy?drink=" + did, false);
-	req.send();
-	//TODO
+	_http_json("GET", url + "/users/" + uid + "/buy?drink=" + did, null, function(content)
+	{
+		callback(content); //TODO
+	});
 }

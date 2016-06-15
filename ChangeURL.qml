@@ -16,6 +16,7 @@
 
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import "lib.js" as Library
 
 Rectangle
 {
@@ -88,7 +89,7 @@ Rectangle
 			console.log("Saving URL: " + url);
 			globalSettings.url = url;
 			//TODO: Do we need to reset the saved uid here?
-			pageLoader.source = lib.isError ? "Error.qml" : "PickUsername.qml";
+			pageLoader.source = main.isError ? "Error.qml" : "PickUsername.qml";
 		}
 	}
 	Action
@@ -97,6 +98,6 @@ Rectangle
 		text: "&Cancel"
 		shortcut: StandardKey.Escape
 		iconName: "go-previous"
-		onTriggered: pageLoader.source = lib.isError ? "Error.qml" : "PickUsername.qml";
+		onTriggered: pageLoader.source = main.isError ? "Error.qml" : "PickUsername.qml";
 	}
 }

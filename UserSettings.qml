@@ -17,6 +17,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.2
+import "lib.js" as Library
 
 Rectangle
 {
@@ -115,7 +116,7 @@ Rectangle
 			if(user.uid == -1) //new user
 			{
 				console.log("Creating new user: " + user.name);
-				lib.call_async("add_user", [globalSettings.url, user.name, user.balance, user.email], function(result)
+				Library.add_user(globalSettings.url, user.name, user.balance, user.email, function(result)
 				{
 					if(result)
 					{
@@ -127,7 +128,7 @@ Rectangle
 			else
 			{
 				console.log("Saving changes to user: " + user.name);
-				lib.call_async("save_user_data", [globalSettings.url, user.uid, user.name, user.balance, user.email], function(result)
+			Library.save_user_data(globalSettings.url, user.uid, user.name, user.balance, user.email, function(result)
 				{
 					//TODO: check if everything went right
 					pageLoader.source = "BuyDrink.qml";
@@ -163,20 +164,14 @@ Rectangle
 		property alias email: email_edit.text
 		function refreshGravatar()
 		{
-			lib.call_async("get_gravatar_url", [user.email], function(result)
-			{
-				if(result)
-				{
-					user.portrait = result;
-				}
-			});
+			user.portrait = Library.get_gravatar_url(user.email);
 		}
 	}
 	Component.onCompleted:
 	{
 		if (user.uid != -1) //existing user
 		{
-			lib.call_async("get_user_data", [globalSettings.url, user.uid], function(result)
+			Library.get_user_data(globalSettings.url, user.uid, function(result)
 			{
 				if(result)
 				{
