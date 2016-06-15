@@ -1,0 +1,2 @@
+?package(qmleteroid): section="Utilities"\
+  title="QMLeteroid" command="/usr/bin/qmlscene /usr/lib/qmleteroid/main.qml"

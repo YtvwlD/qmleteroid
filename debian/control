@@ -1,0 +1,14 @@
+Source: qmleteroid
+Section: utils
+Priority: optional
+Maintainer: Niklas Sombert <niklas@ytvwld.de>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+Vcs-Browser: https://github.com/YtvwlD/qmleteroid
+Vcs-Git: https://github.com/YtvwlD/qmleteroid.git
+
+Package: qmleteroid
+Architecture: all
+Depends: ${misc:Depends}, qmlscene, python3-requests, pyotherside
+Description: a client for Mete
+ Allows you to manage your Mete account.
