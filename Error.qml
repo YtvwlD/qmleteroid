@@ -71,7 +71,6 @@ Rectangle
 	{
 		id: backAction
 		text: "&Back"
-		//shortcut
 		iconName: "go-previous"
 		onTriggered:
 		{
@@ -85,7 +84,6 @@ Rectangle
 	{
 		id: urlAction
 		text: "&Change URL"
-		//shortcut
 		iconName: "preferences-other"
 		onTriggered:
 		{

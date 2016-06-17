@@ -97,7 +97,6 @@ Rectangle
 	{
 		id: saveAction
 		text: "&Save"
-		shortcut: StandardKey.Enter
 		iconName: "go-next"
 		onTriggered:
 		{
@@ -110,7 +109,6 @@ Rectangle
 	{
 		id: addUserAction
 		text: "&Add"
-		//shortcut
 		iconName: "contact-new"
 		onTriggered:
 		{
@@ -122,7 +120,6 @@ Rectangle
 	{
 		id: changeURLAction
 		text: "Change &URL"
-		//shortcut
 		iconName: "preferences-other"
 		onTriggered: pageLoader.source = "ChangeURL.qml"
 	}

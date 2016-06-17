@@ -106,7 +106,6 @@ Rectangle
 		id: switchUserAction
 		text: "S&witch"
 		iconName: "go-previous"
-		//shortcut
 		onTriggered:
 		{
 			console.log("Switching user...");
@@ -118,7 +117,6 @@ Rectangle
 		id: editUserAction
 		text: "&Edit"
 		iconName: "preferences-other"
-		//shortcut
 		onTriggered:
 		{
 			console.log("Editing user " + user.name + "...");
@@ -129,7 +127,6 @@ Rectangle
 	{
 		id: buyAction
 		text: "&Buy"
-		shortcut: StandardKey.Enter
 		iconName: "go-next"
 		onTriggered:
 		{

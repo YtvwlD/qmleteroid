@@ -108,7 +108,6 @@ Rectangle
 	{
 		id: okAction
 		text: "O&k"
-		shortcut: StandardKey.Enter
 		iconName: "go-next"
 		onTriggered:
 		{
@@ -139,7 +138,6 @@ Rectangle
 	{
 		id: cancelAction
 		text: "&Cancel"
-		shortcut: StandardKey.Escape
 		iconName: "go-previous"
 		onTriggered:
 		{
