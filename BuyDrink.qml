@@ -55,10 +55,10 @@ Rectangle
 		{
 			id: drinksGrid
 			anchors.fill: parent
-			anchors.margins: 20
+			anchors.margins: 15
 			clip: true
-			cellWidth: 140 + 10 //margin
-			cellHeight: 140 + 30 // the text
+			cellWidth: 140 + 20 //margin
+			cellHeight: 140 + 60 // the text
 			highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
 			focus: true
 			model: drinksModel
@@ -83,13 +83,15 @@ Rectangle
 				Text
 				{
 					text: name
-					wrapMode: Text.Wrap
-					anchors.horizontalCenter: parent.horizontalCenter
+					wrapMode: Text.WrapAnywhere
+					width: parent.width
+					horizontalAlignment: Text.AlignHCenter
 				}
 				Text
 				{
 					text: "%1 €".arg(donation_recommendation)
-					anchors.horizontalCenter: parent.horizontalCenter
+					width: parent.width
+					horizontalAlignment: Text.AlignHCenter
 				}
 			}
 		}
